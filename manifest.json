@@ -1,0 +1,11 @@
+{
+    "name": "Lespass",
+    "version": "1.0.0",
+    "description": "Let's pass some classes with this easy task tracker",
+    "manifest_version": 3,
+    "author": "Matthew Lerman & Remington Kim",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Your Tasks"
+    }
+}
