@@ -10,7 +10,7 @@
 <body>
     <div class="container mt-3" style="width: 450px;">
         <h2 class="text-center">Select Intensity</h2>
-        <table class="table">
+        <table class="table" id="intensities">
             <thead>
               <tr>
                 <th scope="col">Intensity</th>
@@ -18,15 +18,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr onClick="changeColor(this)">
-                <th scope="row" >Basic</th>
+              <tr>
+                <th scope="row">Basic</th>
                 <td>A simple task tracker where you check off tasks, similar to a to-do list</td>
               </tr>
-              <tr onClick="changeColor(this)">
+              <tr>
                 <th scope="row">Basic But Annoying</th>
                 <td>Same as basic intensity, but sends notifications when deadline approaches. Can be very annoying...</td>
               </tr>
-              <tr onClick="changeColor(this)">
+              <tr>
                 <th scope="row">LETS PASS</th>
                 <td>Only if you really want to work...</td>
               </tr>
@@ -34,5 +34,4 @@
           </table>
     </div>
 </body>
-<script></script>
 </html>

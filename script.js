@@ -9,10 +9,14 @@ function changeColor(row) {
 }
 
 function checkForClicked() {
-    var rows = document.getElementsByTagName("table")[0].rows;
+    let rows = document.getElementsByTagName("table")[0].rows;
     for(let i = 0; i < rows.length; i++) {
         if(rows[i].style.background != "white") {
             rows[i].style.background = "white";
         }
     }
+}
+
+window.onload = function() {
+    document.querySelectorAll('#intensities tr').forEach(e => e.addEventListener("click", function(){changeColor(e);}));
 }
