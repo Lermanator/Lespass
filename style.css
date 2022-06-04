@@ -1,3 +1,9 @@
 .btn-primary, .btn-primary:hover {
-    background-color: #91BAD6 !important;
+    background-color: #1c8fdb ;
+}
+
+
+#errmsg {
+    color:red;
+    text-align: right;
 }
