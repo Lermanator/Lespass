@@ -11,23 +11,24 @@
 </head>
 <body>
     <h2 class="text-center">Add Tasks</h2>
-    <div class="container mt-3" style="width: 450px;">
-        <table class="table ">
+    <div class="container mt-3">
+        <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">Name</th>
+                <th scope="col" style="width:30%">Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><div contenteditable>Name</div></td>
-                <td><div contenteditable>Description</div></td>
-                <td><div contenteditable>Done?</div></td>
+              <tr id="tasktbl">
+                <td><div contenteditable id="name"></div></td>
+                <td><div contenteditable id="desc"></div></td>
               </tr>
             </tbody>
           </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" id="add">Add</button>
     </div>
     <div class="container mt-3" style="width: 450px;">
         <h2 class="text-center">Tasks</h2>
