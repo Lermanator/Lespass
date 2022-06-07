@@ -29,7 +29,6 @@ function saveTasks() {
 }
 
 function renderRows() {
-    tasks = JSON.parse(window.localStorage.getItem("tasks"));
     if(tasks == null) {
         tasks = {};
     }
@@ -51,12 +50,23 @@ function renderRows() {
             let cb = document.createElement("input");
             cb.type = "checkbox";
             cb.classList.add("cb");
-
+            cb.addEventListener("click", () => doneButton());
             tr.appendChild(name);
             tr.appendChild(desc);
             tr.appendChild(cb);
             document.getElementById("tasks").appendChild(tr);
         }
+    }
+    doneButtonVisible();
+}
+
+function doneButtonVisible() {
+    tasks = JSON.parse(window.localStorage.getItem("tasks"));
+    if(Object.keys(tasks).length === 0) {
+        document.getElementById('done').style.visibility = "hidden";
+    }
+    else {
+        document.getElementById('done').style.visibility = "visible";
     }
 }
 
@@ -67,8 +77,27 @@ function removeTasks() {
             document.getElementById("tasks").removeChild(row);
             delete tasks[row.firstChild.innerHTML];
             saveTasks();
+            document.getElementById('done').disabled = true;
         }
     });
+    doneButtonVisible();
+}
+
+function doneButton() {
+    let clicked = false;
+    rows = document.querySelectorAll('.task');
+    rows.forEach(row => {
+        if(row.lastChild.checked) {
+            clicked = true;
+        }
+    });
+    if(clicked) { 
+        document.getElementById('done').disabled = false;
+    }
+    else {
+        document.getElementById('done').disabled = true;
+    }
+
 }
 
 window.onload = function() {
@@ -77,4 +106,5 @@ window.onload = function() {
     document.getElementById('add').addEventListener("click", function(){addTask()});
     document.getElementById('add').disabled = true;
     document.getElementById('done').addEventListener("click", function(){removeTasks()});
+    document.getElementById('done').disabled = true;
 }
