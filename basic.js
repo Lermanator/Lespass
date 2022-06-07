@@ -39,6 +39,7 @@ function renderRows() {
     for(let key in tasks) {
         if(key) {
             let tr = document.createElement("tr");
+            tr.classList.add("task");
             let name = document.createElement("th");
 
             name.scope ="row";
@@ -47,11 +48,27 @@ function renderRows() {
             let desc = document.createElement("td");
             desc.innerHTML = tasks[key];
 
+            let cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.classList.add("cb");
+
             tr.appendChild(name);
             tr.appendChild(desc);
+            tr.appendChild(cb);
             document.getElementById("tasks").appendChild(tr);
         }
     }
+}
+
+function removeTasks() {
+    rows = document.querySelectorAll('.task');
+    rows.forEach(row => {
+        if(row.lastChild.checked) {
+            document.getElementById("tasks").removeChild(row);
+            delete tasks[row.firstChild.innerHTML];
+            saveTasks();
+        }
+    });
 }
 
 window.onload = function() {
@@ -59,4 +76,5 @@ window.onload = function() {
     document.querySelectorAll('input').forEach(e => e.addEventListener("input", function(){checkIfEmpty();}));
     document.getElementById('add').addEventListener("click", function(){addTask()});
     document.getElementById('add').disabled = true;
+    document.getElementById('done').addEventListener("click", function(){removeTasks()});
 }
