@@ -25,11 +25,11 @@ function addTask() {
 }
 
 function saveTasks() {
-    window.localStorage.setItem("tasks", JSON.stringify(tasks));
+    window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
 }
 
 function renderRows() {
-    tasks = JSON.parse(window.localStorage.getItem("tasks"));
+    tasks = JSON.parse(window.localStorage.getItem("bbatasks"));
     if(tasks == null) {
         tasks = {};
     }
@@ -64,7 +64,7 @@ function renderRows() {
 }
 
 function doneButtonVisible() {
-    tasks = JSON.parse(window.localStorage.getItem("tasks"));
+    tasks = JSON.parse(window.localStorage.getItem("bbatasks"));
     if((tasks == null) || (Object.keys(tasks).length === 0)) {
         document.getElementById('done').style.visibility = "hidden";
     }
@@ -104,8 +104,8 @@ function doneButton() {
 }
 
 window.onload = function() {
-    if(window.localStorage.getItem("tasks") === null) {
-        window.localStorage.setItem("tasks", JSON.stringify(tasks));
+    if(window.localStorage.getItem("bbatasks") === null) {
+        window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
     }
     renderRows();
     document.querySelectorAll('input').forEach(e => e.addEventListener("input", function(){checkIfEmpty();}));
