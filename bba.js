@@ -16,7 +16,13 @@ function checkIfEmpty() {
 
 function addTask() {
     const inputs = document.querySelectorAll('input');
-    tasks[inputs[0].value] = inputs[1].value;
+    console.log(inputs[2].value);
+    let y = inputs[2].value.substring(0,4);
+    let m = inputs[2].value.substring(5,7);
+    let d = inputs[2].value.substring(8, 10);
+    let t = inputs[2].value.substring(11);
+    let date = m + "/" + d + "/" + y + " " + t;
+    tasks[inputs[0].value] = [inputs[1].value, date];
     saveTasks();
     renderRows();
     inputs[0].value = "";
@@ -25,11 +31,11 @@ function addTask() {
 }
 
 function saveTasks() {
-    window.localStorage.setItem("tasks", JSON.stringify(tasks));
+    window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
 }
 
 function renderRows() {
-    tasks = JSON.parse(window.localStorage.getItem("tasks"));
+    tasks = JSON.parse(window.localStorage.getItem("bbatasks"));
     if(tasks == null) {
         tasks = {};
     }
@@ -47,7 +53,10 @@ function renderRows() {
             name.innerHTML = key;
 
             let desc = document.createElement("td");
-            desc.innerHTML = tasks[key];
+            desc.innerHTML = tasks[key][0];
+
+            let date = document.createElement("td");
+            date.innerHTML = tasks[key][1];
 
             let cb = document.createElement("input");
             cb.type = "checkbox";
@@ -56,6 +65,7 @@ function renderRows() {
             cb.addEventListener("click", () => doneButton());
             tr.appendChild(name);
             tr.appendChild(desc);
+            tr.appendChild(date);
             tr.appendChild(cb);
             document.getElementById("tasks").appendChild(tr);
         }
@@ -64,7 +74,7 @@ function renderRows() {
 }
 
 function doneButtonVisible() {
-    tasks = JSON.parse(window.localStorage.getItem("tasks"));
+    tasks = JSON.parse(window.localStorage.getItem("bbatasks"));
     if((tasks == null) || (Object.keys(tasks).length === 0)) {
         document.getElementById('done').style.visibility = "hidden";
     }
@@ -103,9 +113,22 @@ function doneButton() {
 
 }
 
+function setMin() {
+    let currentDate = new Date();
+
+    let dd = String(currentDate.getDate()).padStart(2, '0');
+    let mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = currentDate.getFullYear();
+    let mins = String(currentDate.getMinutes() + 1).padStart(2, '0');
+    let hh = String(currentDate.getHours() + 1).padStart(2, '0');
+
+    let min = yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + mins;
+    document.getElementById("tasktime").min = min;
+}
+
 window.onload = function() {
-    if(window.localStorage.getItem("tasks") === null) {
-        window.localStorage.setItem("tasks", JSON.stringify(tasks));
+    if(window.localStorage.getItem("bbatasks") === null) {
+        window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
     }
     renderRows();
     document.querySelectorAll('input').forEach(e => e.addEventListener("input", function(){checkIfEmpty();}));
@@ -113,4 +136,5 @@ window.onload = function() {
     document.getElementById('add').disabled = true;
     document.getElementById('done').addEventListener("click", function(){removeTasks()});
     document.getElementById('done').disabled = true;
+    document.getElementById('tasktime').addEventListener("click", function(){setMin()});
 }
