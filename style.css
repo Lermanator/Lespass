@@ -8,3 +8,16 @@
     color:red;
     text-align: right;
 }
+
+.task {
+    align-items: center
+}
+
+input[type="checkbox"] {
+    vertical-align: middle;
+}
+
+.span12.pagination-centered {
+    margin: 25px auto;
+    width: 100px;
+}
