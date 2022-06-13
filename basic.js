@@ -1,4 +1,5 @@
 tasks = {};
+window.localStorage.setItem("page", "basic");
 
 function checkIfEmpty() {
     const inputs = document.querySelectorAll('input');
@@ -103,6 +104,11 @@ function doneButton() {
 
 }
 
+function goBack() {
+    window.localStorage.setItem("page", "index");
+    window.location.href = "index.html";
+}
+
 window.onload = function() {
     if(window.localStorage.getItem("tasks") === null) {
         window.localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -113,4 +119,5 @@ window.onload = function() {
     document.getElementById('add').disabled = true;
     document.getElementById('done').addEventListener("click", function(){removeTasks()});
     document.getElementById('done').disabled = true;
+    document.getElementById('back').addEventListener("click", function(){goBack()});
 }

@@ -9,6 +9,8 @@
         "default_title": "Your Tasks"
     },
     "permissions": [
-        "tabs"
+        "tabs", 
+        "notifications",
+        "alarms"
     ] 
 }

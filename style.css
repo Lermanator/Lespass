@@ -9,6 +9,17 @@
     text-align: right;
 }
 
+#back {
+    color:black;
+}
+
+#back:hover {
+    background-color: #1c8fdb ;
+}
+
+#tasktime {
+    width: 10rem;
+}
 .task {
     align-items: center
 }

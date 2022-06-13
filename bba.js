@@ -1,4 +1,6 @@
 tasks = {};
+notifications = [];
+window.localStorage.setItem("page", "bba");
 
 function checkIfEmpty() {
     const inputs = document.querySelectorAll('input');
@@ -16,7 +18,6 @@ function checkIfEmpty() {
 
 function addTask() {
     const inputs = document.querySelectorAll('input');
-    console.log(inputs[2].value);
     let y = inputs[2].value.substring(0,4);
     let m = inputs[2].value.substring(5,7);
     let d = inputs[2].value.substring(8, 10);
@@ -126,7 +127,13 @@ function setMin() {
     document.getElementById("tasktime").min = min;
 }
 
+function goBack() {
+    window.localStorage.setItem("page", "index");
+    window.location.href = "index.html";
+}
+
 window.onload = function() {
+    console.log(typeof(chrome))
     if(window.localStorage.getItem("bbatasks") === null) {
         window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
     }
@@ -137,4 +144,5 @@ window.onload = function() {
     document.getElementById('done').addEventListener("click", function(){removeTasks()});
     document.getElementById('done').disabled = true;
     document.getElementById('tasktime').addEventListener("click", function(){setMin()});
+    document.getElementById('back').addEventListener("click", function(){goBack()});
 }

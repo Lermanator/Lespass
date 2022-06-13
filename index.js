@@ -1,4 +1,5 @@
 var clickedRow = null;
+
 function changeColor(row) {
     changeClicked(row);
     if(row.style.background == "" || row.style.background == "white") {
@@ -29,6 +30,14 @@ function changePage() {
 
 
 window.onload = function() {
+    if(window.localStorage.getItem("page") == "index") {}
+    else if(window.localStorage.getItem("page") == null) {
+        window.localStorage.setItem("page", "index");
+    }
+    else {
+        let loc = window.localStorage.getItem("page") + ".html"
+        window.location.href = loc;
+    }
     document.querySelectorAll('#intensities tr').forEach(e => e.addEventListener("click", function(){changeColor(e);}));
     document.getElementById('select').addEventListener("click", function(){changePage()});
     document.getElementById("select").disabled = true;

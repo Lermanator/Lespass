@@ -1,4 +1,5 @@
 tasks = {};
+window.localStorage.setItem("page", "letspass");
 
 function checkIfEmpty() {
     const inputs = document.querySelectorAll('input');
@@ -126,13 +127,17 @@ function setMin() {
     document.getElementById("tasktime").min = min;
 }
 
-window.onload = function() {
+function goBack() {
+    window.localStorage.setItem("page", "index");
+    window.location.href = "index.html"
+}
 
+window.onload = function() {
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
         console.log(tabs[0].url);
-    });    
-    if(window.localStorage.getItem("bbatasks") === null) {
-        window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
+    }); 
+    if(window.localStorage.getItem("letspasstasks") === null) {
+        window.localStorage.setItem("letspasstasks", JSON.stringify(tasks));
     }
     renderRows();
     document.querySelectorAll('input').forEach(e => e.addEventListener("input", function(){checkIfEmpty();}));
@@ -141,4 +146,5 @@ window.onload = function() {
     document.getElementById('done').addEventListener("click", function(){removeTasks()});
     document.getElementById('done').disabled = true;
     document.getElementById('tasktime').addEventListener("click", function(){setMin()});
+    document.getElementById('back').addEventListener("click", function(){goBack()});
 }
