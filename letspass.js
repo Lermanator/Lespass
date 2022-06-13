@@ -127,6 +127,10 @@ function setMin() {
 }
 
 window.onload = function() {
+
+    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+        console.log(tabs[0].url);
+    });    
     if(window.localStorage.getItem("bbatasks") === null) {
         window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
     }
