@@ -138,8 +138,8 @@ function setMin() {
     let min = yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + mins;
     document.getElementById("tasktime").min = min;
 
-    console.log(min)
-    console.log(document.getElementById("tasktime").min)
+    // console.log(min)
+    // console.log(document.getElementById("tasktime").min)
 }
 
 function goBack() {

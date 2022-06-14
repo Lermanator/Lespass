@@ -16,7 +16,8 @@ chrome.tabs.onUpdated.addListener(
             chrome.storage.local.get("urls", (result)=>{
                 if (result["urls"].includes(url)){
                     chrome.storage.local.get("page", (page)=> {
-                        if((page === "lespass") || (page === "urls")) {
+                        // console.log(page)
+                        if((page['page'] === "lespass") || (page['page'] === "urls")) {
                             chrome.tabs.update({url: './back_to_work.html'});
                         }
                     });

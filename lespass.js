@@ -22,7 +22,7 @@ function checkIfEmpty() {
 
 function addTask() {
     const inputs = document.querySelectorAll('input');
-    console.log(inputs[2].value);
+    // console.log(inputs[2].value);
     let y = inputs[2].value.substring(0,4);
     let m = inputs[2].value.substring(5,7);
     let d = inputs[2].value.substring(8, 10);
@@ -149,9 +149,9 @@ function goAddURLs() {
 }
 
 window.onload = function() {
-    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-        console.log(tabs[0].url);
-    }); 
+    // chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+    //     console.log(tabs[0].url);
+    // }); 
     if(window.localStorage.getItem("lespasstasks") === null) {
         window.localStorage.setItem("lespasstasks", JSON.stringify(tasks));
     }
