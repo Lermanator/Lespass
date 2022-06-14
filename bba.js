@@ -11,7 +11,11 @@ function checkIfEmpty() {
             notEmpty = false;
         }
     }
-    if(notEmpty) {
+
+    if(inputs[0].value in tasks) {
+        document.getElementById('add').disabled = true;
+    }
+    else if(notEmpty) {
         document.getElementById('add').disabled = false;
     }
 }
@@ -29,6 +33,13 @@ function addTask() {
     inputs[0].value = "";
     inputs[1].value = "";
     document.getElementById('add').disabled = true;
+
+    chrome.alarms.create(String(Date.now()), {
+        when: new Date(inputs[2].value).getTime()
+    })
+
+
+    
 }
 
 function saveTasks() {
@@ -120,11 +131,14 @@ function setMin() {
     let dd = String(currentDate.getDate()).padStart(2, '0');
     let mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = currentDate.getFullYear();
-    let mins = String(currentDate.getMinutes() + 1).padStart(2, '0');
-    let hh = String(currentDate.getHours() + 1).padStart(2, '0');
+    let mins = String(currentDate.getMinutes() + 5).padStart(2, '0');
+    let hh = String(currentDate.getHours()).padStart(2, '0');
 
     let min = yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + mins;
     document.getElementById("tasktime").min = min;
+
+    console.log(min)
+    console.log(document.getElementById("tasktime").min)
 }
 
 function goBack() {
@@ -133,7 +147,8 @@ function goBack() {
 }
 
 window.onload = function() {
-    console.log(typeof(chrome))
+
+
     if(window.localStorage.getItem("bbatasks") === null) {
         window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
     }

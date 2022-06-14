@@ -10,7 +10,11 @@ function checkIfEmpty() {
             notEmpty = false;
         }
     }
-    if(notEmpty) {
+
+    if(inputs[0].value in tasks) {
+        document.getElementById('add').disabled = true;
+    }
+    else if(notEmpty) {
         document.getElementById('add').disabled = false;
     }
 }

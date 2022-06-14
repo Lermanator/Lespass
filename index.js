@@ -30,6 +30,7 @@ function changePage() {
 
 
 window.onload = function() {
+    // window.localStorage.setItem("page", "index");
     if(window.localStorage.getItem("page") == "index") {}
     else if(window.localStorage.getItem("page") == null) {
         window.localStorage.setItem("page", "index");

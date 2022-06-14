@@ -1,5 +1,5 @@
 tasks = {};
-window.localStorage.setItem("page", "letspass");
+window.localStorage.setItem("page", "lespass");
 
 function checkIfEmpty() {
     const inputs = document.querySelectorAll('input');
@@ -10,7 +10,11 @@ function checkIfEmpty() {
             notEmpty = false;
         }
     }
-    if(notEmpty) {
+
+    if(inputs[0].value in tasks) {
+        document.getElementById('add').disabled = true;
+    }
+    else if(notEmpty) {
         document.getElementById('add').disabled = false;
     }
 }
@@ -29,14 +33,20 @@ function addTask() {
     inputs[0].value = "";
     inputs[1].value = "";
     document.getElementById('add').disabled = true;
+
+
+    chrome.alarms.create(String(Date.now()), {
+        when: new Date(inputs[2].value).getTime()
+    })
+
 }
 
 function saveTasks() {
-    window.localStorage.setItem("bbatasks", JSON.stringify(tasks));
+    window.localStorage.setItem("lespasstasks", JSON.stringify(tasks));
 }
 
 function renderRows() {
-    tasks = JSON.parse(window.localStorage.getItem("bbatasks"));
+    tasks = JSON.parse(window.localStorage.getItem("lespasstasks"));
     if(tasks == null) {
         tasks = {};
     }
@@ -75,7 +85,7 @@ function renderRows() {
 }
 
 function doneButtonVisible() {
-    tasks = JSON.parse(window.localStorage.getItem("bbatasks"));
+    tasks = JSON.parse(window.localStorage.getItem("lespasstasks"));
     if((tasks == null) || (Object.keys(tasks).length === 0)) {
         document.getElementById('done').style.visibility = "hidden";
     }
@@ -129,15 +139,20 @@ function setMin() {
 
 function goBack() {
     window.localStorage.setItem("page", "index");
-    window.location.href = "index.html"
+    window.location.href = "index.html";
+}
+
+function goAddURLs() {
+    window.localStorage.setItem("page", "urls");
+    window.location.href = "urls.html";
 }
 
 window.onload = function() {
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
         console.log(tabs[0].url);
     }); 
-    if(window.localStorage.getItem("letspasstasks") === null) {
-        window.localStorage.setItem("letspasstasks", JSON.stringify(tasks));
+    if(window.localStorage.getItem("lespasstasks") === null) {
+        window.localStorage.setItem("lespasstasks", JSON.stringify(tasks));
     }
     renderRows();
     document.querySelectorAll('input').forEach(e => e.addEventListener("input", function(){checkIfEmpty();}));
@@ -147,4 +162,6 @@ window.onload = function() {
     document.getElementById('done').disabled = true;
     document.getElementById('tasktime').addEventListener("click", function(){setMin()});
     document.getElementById('back').addEventListener("click", function(){goBack()});
+    document.getElementById('add-urls').addEventListener("click", function(){goAddURLs()});
+    
 }
