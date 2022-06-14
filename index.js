@@ -1,4 +1,5 @@
 var clickedRow = null;
+chrome.storage.local.set({"page":  "index"});
 
 function changeColor(row) {
     changeClicked(row);

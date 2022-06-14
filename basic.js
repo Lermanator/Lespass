@@ -1,5 +1,6 @@
 tasks = {};
 window.localStorage.setItem("page", "basic");
+chrome.storage.local.set({"page":  "basic"});
 
 function checkIfEmpty() {
     const inputs = document.querySelectorAll('input');

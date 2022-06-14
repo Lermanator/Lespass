@@ -1,5 +1,6 @@
 var urls = [];
 window.localStorage.setItem("page", "urls");
+chrome.storage.local.set({"page":  "urls"});
 
 function checkIfEmpty() {
     const inputs = document.querySelectorAll('input');
