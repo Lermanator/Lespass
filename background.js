@@ -15,7 +15,8 @@ chrome.tabs.onUpdated.addListener(
             let url = tabs[0].url;
             chrome.storage.local.get("urls", (result)=>{
                 console.log(result)
-                if (url in result){
+                console.log(url)
+                if (result["urls"].includes(url)){
                     chrome.tabs.update({url: './back_to_work.html'})
                 }
             }

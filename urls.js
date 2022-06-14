@@ -29,6 +29,7 @@ function addUrl() {
 
 function saveTasks() {
     window.localStorage.setItem("urls", JSON.stringify(urls));
+    chrome.storage.local.set({"urls":  JSON.stringify(urls)})
 }
 
 function renderRows() {
